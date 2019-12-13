@@ -1,8 +1,8 @@
 package services
 
 import (
-	"go-microservices/mvc/domain"
-	"go-microservices/mvc/utils"
+	"github.com/ddefrancesco/go-microservices/mvc/domain"
+	"github.com/ddefrancesco/go-microservices/mvc/utils"
 	"log"
 )
 

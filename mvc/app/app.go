@@ -1,7 +1,7 @@
 package app
 
 import (
-	"go-microservices/mvc/controllers"
+	"github.com/ddefrancesco/go-microservices/mvc/controllers"
 	"log"
 	"net/http"
 )
