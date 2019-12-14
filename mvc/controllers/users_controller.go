@@ -1,17 +1,17 @@
 package controllers
 
 import (
-	"encoding/json"
-	"go-microservices/mvc/services"
-	"go-microservices/mvc/utils"
+	"github.com/ddefrancesco/go-microservices/mvc/services"
+	"github.com/ddefrancesco/go-microservices/mvc/utils"
+	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
 	"strconv"
 )
 
-func GetUser(resp http.ResponseWriter , req *http.Request)  {
+func GetUser(c *gin.Context)  {
 	log.Print("Query get param")
-	userId, err := strconv.ParseUint(req.URL.Query().Get("user_id"),10,64)
+	userId, err := strconv.ParseUint(c.Param("user_id"),10,64)
 	log.Printf("user_id %v",userId)
 	if err != nil {
 		//return bad request
@@ -21,22 +21,18 @@ func GetUser(resp http.ResponseWriter , req *http.Request)  {
 			Code: "bad_request",
 
 		}
-		jsonValue,_ := json.Marshal(apiErr)
-		resp.WriteHeader(apiErr.StatusCode)
-		resp.Write(jsonValue)
+		c.JSON(apiErr.StatusCode,apiErr)
 		return
 	}
 	log.Printf("user_id %v",userId)
-	user, apiErr := services.GetUser(userId)
+	user, apiErr := services.UserService.GetUser(userId)
 
 	if apiErr != nil {
 		//Take care of the error then return
-		resp.WriteHeader(apiErr.StatusCode)
-		resp.Write([]byte(apiErr.Message))
+		c.JSON(apiErr.StatusCode,apiErr)
 		return
 
 	}
 	log.Print("user trovato")
-	jsonValue,_ := json.Marshal(user)
-	resp.Write(jsonValue)
+	c.JSON(http.StatusOK,user)
 }
