@@ -3,8 +3,8 @@ package github_provider
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/ddefrancesco/go-microservices/src/client/restclient"
-	"github.com/ddefrancesco/go-microservices/src/domain/github"
+	"github.com/ddefrancesco/go-microservices/src/api/client/restclient"
+	"github.com/ddefrancesco/go-microservices/src/api/domain/github"
 	"io/ioutil"
 	"log"
 	"net/http"

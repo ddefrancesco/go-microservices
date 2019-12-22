@@ -29,7 +29,7 @@ func TestCreateRepoRequestAsJson(t *testing.T)  {
 	assert.Nil(t,err)
 	assert.NotNil(t,target)
 
-	assert.EqualValues(t,target.Name,request.Name)
-	assert.EqualValues(t,target.HasIssues,request.HasIssues)
+	assert.EqualValues(t, Name, Name)
+	assert.EqualValues(t, HasIssues, HasIssues)
 	
 }
