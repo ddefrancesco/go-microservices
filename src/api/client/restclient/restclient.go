@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"log"
 	"net/http"
 )
 
@@ -53,6 +54,7 @@ func Post(url string, body interface{}, headers http.Header) (*http.Response, er
 	}
 
 	jsonBytes, err := json.Marshal(body)
+	log.Printf("restclient.go: %s",jsonBytes)
 	if err != nil {
 		return nil, err
 	}

@@ -45,8 +45,8 @@ func (m *reposService) CreateRepo(inputRequest repositories.CreateRepoRequest) (
 
 	result := repositories.CreateRepoResponse{
 		Id:    response.Id,
-		Owner: response.Owner.Login,
 		Name:  response.Name,
+		Owner: response.Owner.Login,
 	}
 
 	return &result,nil

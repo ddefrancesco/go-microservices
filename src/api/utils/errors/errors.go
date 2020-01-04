@@ -1,6 +1,11 @@
 package errors
 
-import "net/http"
+import (
+	"encoding/json"
+	"github.com/pkg/errors"
+	"log"
+	"net/http"
+)
 
 type ApiError interface {
 	Status() int
@@ -33,7 +38,18 @@ func NewApiError(statusCode int, message string) ApiError{
 
 	}
 }
+func NewApiErrorFromBytes(b []byte) (ApiError, error){
+	var result apiError
+	log.Printf("errors.go::bytes: %c", b)
+	if err := json.Unmarshal(b, &result); err != nil {
+		log.Printf("errors.go::NewApiErrorFromBytes:Status: %d", result.Status())
+		log.Printf("errors.go::NewApiErrorFromBytes:Message: %s ", result.Message())
 
+		return nil, errors.New("invalid json body")
+	}
+
+	return &result, nil
+}
 func NewNotFoundError(message string) ApiError {
 	return &apiError{
 		status:  http.StatusNotFound,
